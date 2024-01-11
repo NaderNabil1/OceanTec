@@ -10,6 +10,11 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    
+    }
     public function index(){
         $products = Product::get();
         return view('Dashboard.Product.index', compact('products'));
