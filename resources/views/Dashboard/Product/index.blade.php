@@ -36,7 +36,6 @@
                             <th>Category</th>
                             <th>Price</th>
                             <th>Image</th>
-                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -49,17 +48,10 @@
                             <td>{{ $product->Category->title ?? '-' }}</td>
                             <td>{{ $product->price }}</td>
                             <td>@if($product->image != '') <img src="{{ url('/uploads') . '/' . $product->image }}" alt="{{ $product->title }}" style="width:50px;"/> @else - @endif</td>
-                            <td>{{ $product->status }}</td>
                             <td>
-                                @if(Auth::user()->role !='Operations')
                                 <a href="{{ Route('edit-product', $product->id) }}" class="btn btn-success w-min-sm m-b-0-25 waves-effect waves-light">Edit</a>
-                                @else
-                                <a href="{{ Route('show-product', $product->id) }}" class="btn btn-success w-min-sm m-b-0-25 waves-effect waves-light">Show Product</a>
-                                @endif
                                 <a href="{{ Route('product-details', ['slug' => $product->Category->slug, 'prodSlug' => $product->slug]) }}" target="blank" class="btn btn-purple w-min-sm m-b-0-25 waves-effect waves-light">Show on website</a>
-                                @if(Auth::user()->role !='Operations')
                                 <button data-title="{{ $product->title }}" data-route="{{ Route('delete-product', $product->id) }}" class="btn btn-danger w-min-sm m-b-0-25 waves-effect waves-light run-swal" data-type="cancel">Delete</button>
-                                @endif
                             </td>
                         </tr>
                         @endforeach

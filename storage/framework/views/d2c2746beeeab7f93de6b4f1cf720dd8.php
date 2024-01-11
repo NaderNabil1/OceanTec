@@ -1,5 +1,5 @@
 
-<?php $__env->startSection('title'); ?> Add category <?php $__env->stopSection(); ?>
+<?php $__env->startSection('title'); ?> Edit category <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('stylesheets'); ?>
 <link rel="stylesheet" href="<?php echo e(asset('BackEnd/vendor/dropify/dist/css/dropify.min.css')); ?>">
@@ -8,18 +8,18 @@
 <?php $__env->startSection('content'); ?>
 <div class="content-area p-y-1">
     <div class="container-fluid">
-        <h4>Add new category</h4>
+        <h4>Edit category</h4>
         <ol class="breadcrumb no-bg m-b-1">
-            <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="<?php echo e(route('dashboard')); ?>">Dashboard</a></li>
             <li class="breadcrumb-item"><a href="<?php echo e(Route('be-categories')); ?>">Categories</a></li>
-            <li class="breadcrumb-item active">Add new category</li>
+            <li class="breadcrumb-item active">Edit category</li>
         </ol>
     </div>
 
     <div class="container-fluid">
         <div class="box box-block bg-white">
             <div class="row">
-                <div class="col-md-6 col-xs-12"><h5 class="m-b-1">Add new category</h5></div>
+                <div class="col-md-6 col-xs-12"><h5 class="m-b-1">Edit category</h5></div>
             </div>
 
             <div class="box box-block bg-white">
@@ -29,7 +29,7 @@
                         <div class="col-md-12 col-xs-12">
                             <div class="form-group">
                                 <label for="title">Title</label>
-                                <input type="text" name="title" class="form-control" id="title" placeholder="Enter category title">
+                                <input type="text" name="title" class="form-control" id="title" placeholder="Enter category title" value="<?php echo e($category->title); ?>">
                             </div>
                         </div>
                     </div>
@@ -37,23 +37,24 @@
                         <div class="col-md-12 col-xs-12">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea name="description" rows="4" id="description" class="form-control" placeholder="Enter category description"></textarea>
+                                <textarea name="description" rows="4" id="description" class="form-control" placeholder="Enter category description"><?php echo e($category->description); ?></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
                             <div class="form-group">
-                                <label for="image"></label>
-                                <input type="file" name="image" class="dropify" id="image" data-max-file-size="2M">
+                                <label for="image">Image </label>
+                                <input type="file" name="image" class="dropify" id="image" data-max-file-size="2M" <?php if($category->image != ''): ?> data-default-file="<?php echo e(url('/uploads') . '/' . $category->image); ?>" <?php endif; ?>>
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
         </div>
     </div>
+
 </div>
 <?php $__env->stopSection(); ?>
 
@@ -94,7 +95,7 @@
         messages: {
             title: {
                 required: "Please enter the title",
-        },
+            },
         },
 
     submitHandler: function (form) {
@@ -104,4 +105,4 @@
 </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('Dashboard.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Nader\OceanTec\resources\views/Dashboard/Category/add.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('Dashboard.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Nader\OceanTec\resources\views/Dashboard/Category/edit.blade.php ENDPATH**/ ?>

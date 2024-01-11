@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,9 +25,11 @@ class AppServiceProvider extends ServiceProvider
             \URL::forceScheme('https');
         }
         view()->composer('*', function ($view){
+            $menuCategories = Category::all();
             $auth_user = Auth::id();
             $view->with([
                 'auth_user' => $auth_user, 
+                'menuCategories' => $menuCategories, 
             ]);
         });
     }

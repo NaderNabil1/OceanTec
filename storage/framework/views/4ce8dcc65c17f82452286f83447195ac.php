@@ -1,4 +1,6 @@
-<?php $__env->startSection('title'); ?> الرئيسية <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('title'); ?><?php echo e($category->title); ?>  <?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
 <?php if($products->Count() > 0): ?>
 <div class="shell">
@@ -35,4 +37,5 @@
 </div>
 <?php endif; ?>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('FrontEnd.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Nader\OceanTec\resources\views/FrontEnd/Page/index.blade.php ENDPATH**/ ?>
+
+<?php echo $__env->make('FrontEnd.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Nader\OceanTec\resources\views/FrontEnd/Category/products.blade.php ENDPATH**/ ?>

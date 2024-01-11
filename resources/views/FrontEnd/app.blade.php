@@ -18,26 +18,28 @@
                     <nav id="navigation" class="navigation navigation-landscape">
                         <div class="nav-header">
                             <a class="nav-brand" href="{{ route('home')}}">
-                                <img src="{{ asset('FrontEnd/img/logo2.png') }}" class="logo edited" alt="OceanTec" />
+                                <img src="{{ asset('FrontEnd/img/logo.png') }}" class="logo edited" alt="OceanTec" />
                             </a>
                             <div class="nav-toggle"></div>
                         </div>
                         <div class="nav-menus-wrapper" style="transition-property: none;">
                             <ul class="nav-menu">
-                                <li @if(Route::current()->getName() == 'home') active @endif><a href="{{ Route('home') }}">Home</a></li>
-                                @if(Auth::User())
-                                <li @if(Route::current()->getName() == 'categories') active @endif><a href="{{ Route('categories') }}">Categories</a></li>
-                                @endif
+                                <li @if(Route::current()->getName() == 'home') active @endif><a href="{{ Route('home') }}">الرئيسية</a></li>
+                                @foreach($menuCategories as $menuCategory)
+                                <li class="lvl1 @if($menuCategories->Count() > 0)  @endif">
+                                    <a href="{{ Route('products', $menuCategory->slug) }}">{{ $menuCategory->title }} </a>
+                                </li>
+                                @endforeach
                             </ul>
 
                             <ul class="nav-menu nav-menu-social align-to-right">
                                 @if(Auth::User() && Auth::User()->role == 'Admin' )
-                                <li><a href="{{ route('dashboard') }}" target="_blank">Dashboard</a></li>
+                                <li><a href="{{ route('dashboard') }}" target="_blank">لوحة التحكم</a></li>
                                 @endif
                                 @if(Auth::user())
-                                <li><a href="{{ Route('edit-account') }}">Edit account</a></li>
+                                <li><a href="{{ Route('edit-account') }}">حسابي</a></li>
                                 @else
-                                <li><a href="{{ route('login') }}" data-target="#login">Login</a></li>
+                                <li><a href="{{ route('login') }}" data-target="#login">تسجيل الدخول</a></li>
                                 @endif
                         </div>
                     </nav>
@@ -47,13 +49,6 @@
             @yield('content')
         </div>
         @yield('productShow')
-        <!-- ============================================================== -->
-        <!-- End Wrapper -->
-        <!-- ============================================================== -->
-
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
       
         <script src="{{ asset('FrontEnd/js/jquery.min.js') }}"></script>
         <script src="{{ asset('FrontEnd/js/popper.min.js') }}"></script>

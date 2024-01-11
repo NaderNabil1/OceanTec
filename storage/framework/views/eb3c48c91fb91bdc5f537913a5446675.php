@@ -36,7 +36,6 @@
                             <th>Category</th>
                             <th>Price</th>
                             <th>Image</th>
-                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -49,17 +48,10 @@
                             <td><?php echo e($product->Category->title ?? '-'); ?></td>
                             <td><?php echo e($product->price); ?></td>
                             <td><?php if($product->image != ''): ?> <img src="<?php echo e(url('/uploads') . '/' . $product->image); ?>" alt="<?php echo e($product->title); ?>" style="width:50px;"/> <?php else: ?> - <?php endif; ?></td>
-                            <td><?php echo e($product->status); ?></td>
                             <td>
-                                <?php if(Auth::user()->role !='Operations'): ?>
                                 <a href="<?php echo e(Route('edit-product', $product->id)); ?>" class="btn btn-success w-min-sm m-b-0-25 waves-effect waves-light">Edit</a>
-                                <?php else: ?>
-                                <a href="<?php echo e(Route('show-product', $product->id)); ?>" class="btn btn-success w-min-sm m-b-0-25 waves-effect waves-light">Show Product</a>
-                                <?php endif; ?>
                                 <a href="<?php echo e(Route('product-details', ['slug' => $product->Category->slug, 'prodSlug' => $product->slug])); ?>" target="blank" class="btn btn-purple w-min-sm m-b-0-25 waves-effect waves-light">Show on website</a>
-                                <?php if(Auth::user()->role !='Operations'): ?>
                                 <button data-title="<?php echo e($product->title); ?>" data-route="<?php echo e(Route('delete-product', $product->id)); ?>" class="btn btn-danger w-min-sm m-b-0-25 waves-effect waves-light run-swal" data-type="cancel">Delete</button>
-                                <?php endif; ?>
                             </td>
                         </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

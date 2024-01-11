@@ -18,26 +18,28 @@
                     <nav id="navigation" class="navigation navigation-landscape">
                         <div class="nav-header">
                             <a class="nav-brand" href="<?php echo e(route('home')); ?>">
-                                <img src="<?php echo e(asset('FrontEnd/img/logo2.png')); ?>" class="logo edited" alt="OceanTec" />
+                                <img src="<?php echo e(asset('FrontEnd/img/logo.png')); ?>" class="logo edited" alt="OceanTec" />
                             </a>
                             <div class="nav-toggle"></div>
                         </div>
                         <div class="nav-menus-wrapper" style="transition-property: none;">
                             <ul class="nav-menu">
-                                <li <?php if(Route::current()->getName() == 'home'): ?> active <?php endif; ?>><a href="<?php echo e(Route('home')); ?>">Home</a></li>
-                                <?php if(Auth::User()): ?>
-                                <li <?php if(Route::current()->getName() == 'categories'): ?> active <?php endif; ?>><a href="<?php echo e(Route('categories')); ?>">Categories</a></li>
-                                <?php endif; ?>
+                                <li <?php if(Route::current()->getName() == 'home'): ?> active <?php endif; ?>><a href="<?php echo e(Route('home')); ?>">الرئيسية</a></li>
+                                <?php $__currentLoopData = $menuCategories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $menuCategory): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li class="lvl1 <?php if($menuCategories->Count() > 0): ?>  <?php endif; ?>">
+                                    <a href="<?php echo e(Route('products', $menuCategory->slug)); ?>"><?php echo e($menuCategory->title); ?> </a>
+                                </li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </ul>
 
                             <ul class="nav-menu nav-menu-social align-to-right">
                                 <?php if(Auth::User() && Auth::User()->role == 'Admin' ): ?>
-                                <li><a href="<?php echo e(route('dashboard')); ?>" target="_blank">Dashboard</a></li>
+                                <li><a href="<?php echo e(route('dashboard')); ?>" target="_blank">لوحة التحكم</a></li>
                                 <?php endif; ?>
                                 <?php if(Auth::user()): ?>
-                                <li><a href="<?php echo e(Route('edit-account')); ?>">Edit account</a></li>
+                                <li><a href="<?php echo e(Route('edit-account')); ?>">حسابي</a></li>
                                 <?php else: ?>
-                                <li><a href="<?php echo e(route('login')); ?>" data-target="#login">Login</a></li>
+                                <li><a href="<?php echo e(route('login')); ?>" data-target="#login">تسجيل الدخول</a></li>
                                 <?php endif; ?>
                         </div>
                     </nav>
@@ -47,13 +49,6 @@
             <?php echo $__env->yieldContent('content'); ?>
         </div>
         <?php echo $__env->yieldContent('productShow'); ?>
-        <!-- ============================================================== -->
-        <!-- End Wrapper -->
-        <!-- ============================================================== -->
-
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
       
         <script src="<?php echo e(asset('FrontEnd/js/jquery.min.js')); ?>"></script>
         <script src="<?php echo e(asset('FrontEnd/js/popper.min.js')); ?>"></script>
